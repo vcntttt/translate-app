@@ -20,36 +20,58 @@ type Props =
       interchange?: () => void;
     };
 
-export default function LanguageBar({ onChange, type, value, interchange }: Props) {
-  const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-      if (type === SectionType.From) {
-    onChange(e.target.value as FromLanguage); // Maneja "auto" y otros idiomas
-  } else {
-    onChange(e.target.value as Language); // Solo idiomas, excluyendo "auto"
-  }
+export default function LanguageBar({
+  onChange,
+  type,
+  value,
+  interchange,
+}: Props) {
 
+  const handleChange = (language:string) => {
+    if (type === SectionType.From) {
+      onChange(language as FromLanguage);
+    } else {
+      onChange(language as Language);
+    }
   };
+  const baseClass = 'border-0 font-semibold bg-transparent text-opacity-35'
+  const activeClass = `bg-[#4D5562] ${baseClass} text-opacity-100`;
+
   return (
     <div className="flex gap-x-4 justify-between">
-      <select
-        aria-label="Selecciona el idioma"
-        onChange={handleChange}
-        value={value}
-      >
-        {type === SectionType.From && (
-          <option value={AUTO_LANGUAGE}>Detectar idioma</option>
-        )}
-
-        {Object.entries(SUPPORTED_LANGUAGES).map(([key, literal]) => (
-          <option key={key} value={key}>
-            {literal}
-          </option>
-        ))}
-      </select>
+      <div className="flex gap-x-2">
+      {type === SectionType.From && (
+        <Button
+          key="auto"
+          onClick={() => {
+            handleChange(AUTO_LANGUAGE);
+          }}
+          class={value === "auto" ? activeClass : baseClass}
+        >
+          Detectar idioma
+        </Button>
+      )}
+      {
+        Object.entries(SUPPORTED_LANGUAGES).map(([key, name]) => (
+          <Button
+            key={key}
+            onClick={() => {
+              handleChange(key);
+            }}
+            class={value === key ? activeClass : baseClass}
+          >
+            {name}
+          </Button>
+        ))
+      }
+      </div>
       {type === SectionType.To && (
-        <Button onClick={() => {
-          interchange?.();
-        }}>
+        <Button
+          onClick={() => {
+            interchange?.();
+          }}
+          class="w-10 p-1 px-2"
+        >
           <img src="/Horizontal_top_left_main.svg" />
         </Button>
       )}

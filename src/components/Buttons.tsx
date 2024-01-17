@@ -1,16 +1,16 @@
 import React from "react";
 
-export function Button({
-  children,
-  onClick,
-}: {
-  children: React.ReactNode;
-  onClick: () => void;
-}) {
+interface Props{
+  children: React.ReactNode
+  onClick: () => void
+  class?: string
+}
+export function Button({ children, onClick, class : className} : Props) {
   return (
     <button
       onClick={onClick}
-      className="bg-[#1f2937] p-3 opacity-80 border-gray-400 border-2 rounded-xl text-[#F9FAFB]"
+      className={`bg-[#1f2937] p-3 opacity-80 border-gray-400 border-2 rounded-xl text-[#F9FAFB] ${className}`}
+
     >
       {children}
     </button>

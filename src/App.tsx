@@ -34,7 +34,7 @@ function App() {
 
   return (
     <main className="flex gap-x-4 flex-col">
-      <img src="/logo.svg" className="w-96 mx-auto my-10" />
+      <img src="/logo.svg" className="w-76 mx-auto my-10" />
       <section className="grid grid-cols-1 lg:grid-cols-2 mx-auto">
         <Box auto={true}>
           <LanguageBar
@@ -50,11 +50,11 @@ function App() {
               onChange={(e) => setFromText(e.target.value)}
               value={fromText}
             />
-            <p className="flex justify-end opacity-50">{fromText.length}/500</p>
+            <p className="text-xs flex justify-end opacity-50">{fromText.length}/500</p>
           </form>
           <div className="flex gap-x-2 justify-between">
           <Buttons text={fromText}/>
-            <button type="submit" onClick={translate} className="flex bg-[#3662E3] hover:bg-[#7CA9F3] p-3 px-5 rounded-md">
+            <button type="submit" onClick={translate} className="flex bg-[#3662E3] hover:bg-[#7CA9F3] p-3 px-5 rounded-md border-2 border-opacity-30 border-white">
               <img src="/Sort_alfa.svg" className="w-6" alt="translate-logo" />
               Translate
             </button>
