@@ -34,8 +34,9 @@ export default function LanguageBar({
       onChange(language as Language);
     }
   };
-  const baseClass = 'border-0 font-semibold bg-transparent text-opacity-35'
-  const activeClass = `bg-[#4D5562] ${baseClass} text-opacity-100`;
+  const baseClass = 'font-semibold border-opacity-0'
+  const inactiveClass = `bg-transparent text-opacity-35 ${baseClass}`;
+  const activeClass = ` ${baseClass} bg-[#4D5562] text-opacity-100`;
 
   return (
     <div className="flex gap-x-4 justify-between">
@@ -46,7 +47,7 @@ export default function LanguageBar({
           onClick={() => {
             handleChange(AUTO_LANGUAGE);
           }}
-          class={value === "auto" ? activeClass : baseClass}
+          class={value === "auto" ? activeClass : inactiveClass}
         >
           Detectar idioma
         </Button>
@@ -58,7 +59,7 @@ export default function LanguageBar({
             onClick={() => {
               handleChange(key);
             }}
-            class={value === key ? activeClass : baseClass}
+            class={value === key ? activeClass : inactiveClass}
           >
             {name}
           </Button>
